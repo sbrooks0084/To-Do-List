@@ -28,7 +28,7 @@ app.get("/tasks", async (req, res) =>{
 app.get('/tasks/:id', async (req, res) =>{
     try {
         const {id} = req.params
-        const task = await pool.query('SELECT * FROM todo WHERE task_id = $1', [id])
+        const task = await pool.query('SELECT * FROM todo WHERE todo_id = $1', [id])
     } catch (error) {
         console.error(error.message)
     }
@@ -48,9 +48,28 @@ app.post("/tasks", async (req, res) =>{
 
 
 //update a task
+app.put('/tasks/:id', async (req, res) =>{
+    try {
+        const {id} = req.params
+        const {task} = req.body
+        const updateTask = await pool.query('UPDATE todo SET task = $1 WHERE todo_id = $2', [task, id])
+        res.json('Task was updated')
+    } catch (error) {
+        console.error(error.message)
+    }
+})
 
 
 //delete a task
+app.delete('/tasks/:id', async (req, res) =>{
+    try {
+        const {id} = req.params
+        const deleteTask = await pool.query('DELETE FROM todo WHERE todo_id = $1', [id])
+        res.json('Task was deleted')
+    } catch (error) {
+        console.log(error.message)
+    }
+})
 
 
 app.listen(PORT, () => {

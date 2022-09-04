@@ -1,17 +1,13 @@
 const express = require('express')
-const { Pool } = require('pg')
+const pool = require('./db')
 const app = express()
 const PORT = 4000
 
-const pool = new Pool({
-    user: 'shannonbrooks',
-    password: '',
-    host: 'localhost',
-    port: 5432,
-    database: 'fullstack'
-})
+
 
 app.use(express.json())//access req.body
+
+app.use(express.static('public'))
 
 //get all tasks
 app.get("/tasks", async (req, res) =>{
@@ -29,6 +25,7 @@ app.get('/tasks/:id', async (req, res) =>{
     try {
         const {id} = req.params
         const task = await pool.query('SELECT * FROM todo WHERE todo_id = $1', [id])
+        res.status(200).send(task)
     } catch (error) {
         console.error(error.message)
     }

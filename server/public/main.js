@@ -1,3 +1,5 @@
+
+
 let addToDoButton = document.getElementById('addToDo')
 let toDoContainer = document.getElementById('toDoContainer')
 let inputField =document.getElementById('inputField')
@@ -15,3 +17,11 @@ addToDoButton.addEventListener('click', function(){
         toDoContainer.removeChild(paragraph)
     })
 })
+
+// addToDoButton.addEventListener('click', async (e) => {
+//     const data = await fetch('http://localhost:4000/tasks/1')
+//     const json = await data.json()
+//     console.log(json)
+
+// })
+

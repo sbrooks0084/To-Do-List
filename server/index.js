@@ -1,10 +1,11 @@
 const express = require('express')
 const pool = require('./db')
 const app = express()
+//const cors = require('cors')
 const PORT = 4000
 
 
-
+//app.use(cors())
 app.use(express.json())//access req.body
 
 app.use(express.static('public'))
@@ -16,6 +17,7 @@ app.get("/tasks", async (req, res) =>{
         res.json(allTasks.rows)
     } catch (error) {
         console.log(error.message)
+        res.status(500).json(error)
     }
 })
 

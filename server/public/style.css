@@ -21,7 +21,15 @@ html, body {
 
 #addToDo {
     height: 50px;
-    width: 50px;
+    
+    border: 1px solid black;
+    vertical-align: middle;
+    font-size: 30px;;
+}
+
+#getAll {
+    height: 50px;
+    
     border: 1px solid black;
     vertical-align: middle;
     font-size: 30px;;

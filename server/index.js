@@ -1,12 +1,12 @@
 const express = require('express')
 const pool = require('./pool')
 const app = express()
-//const cors = require('cors')
+const cors = require('cors')
 const db = require('./db/db')
-const PORT = process.env.PORT || 4000
+const PORT = 4000
 
 
-//app.use(cors())
+app.use(cors())
 app.use(express.json())//access req.body
 
 app.use(express.static('public'))
@@ -28,7 +28,7 @@ app.get('/tasks/:id', async (req, res) =>{
     try {
         const {id} = req.params
         const task = await pool.query('SELECT * FROM todo WHERE todo_id = $1', [id])
-        res.status(200).send(task)
+        res.status(200).send(task.rows)
     } catch (error) {
         console.error(error.message)
     }
@@ -39,6 +39,7 @@ app.get('/tasks/:id', async (req, res) =>{
 app.post("/tasks", async (req, res) =>{
     try {
         const {task} = req.body 
+        console.log(task)
         const newTask = await pool.query("INSERT INTO todo (task) VALUES ($1) RETURNING *", [task])
         res.json(newTask.rows)
     } catch (error) {

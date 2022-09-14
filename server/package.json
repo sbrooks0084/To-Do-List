@@ -10,5 +10,8 @@
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js"
+  },
+  "engines": {
+    "node": "16.17.0"
   }
 }

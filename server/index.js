@@ -1,10 +1,9 @@
 const express = require('express')
 const pool = require('./pool')
 const app = express()
-const cors = require('cors')
-const db = require('./db/db')
 const PORT = 4000
 
+const cors = require('cors')
 
 app.use(cors())
 app.use(express.json())//access req.body
@@ -22,7 +21,6 @@ app.get("/tasks", async (req, res) =>{
     }
 })
 
-
 //get one task
 app.get('/tasks/:id', async (req, res) =>{
     try {
@@ -33,7 +31,6 @@ app.get('/tasks/:id', async (req, res) =>{
         console.error(error.message)
     }
 })
-
 
 //create a task
 app.post("/tasks", async (req, res) =>{
